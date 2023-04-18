@@ -2,10 +2,14 @@ import classNames from "classnames";
 import { useContext } from "react";
 import NavigationContext from "./navigation";
 
-function Link({ to, children }) {
-  const { navigate } = useContext(NavigationContext);
+function Link({ to, children, className, activeClassName }) {
+  const { navigate, currentPath } = useContext(NavigationContext);
 
-  const classes = classNames("text-blue-500", "mb-3");
+  const classes = classNames(
+    "text-blue-500",
+    className,
+    currentPath === to && activeClassName
+  );
 
   const handleClick = (event) => {
     if (event.metaKey || event.ctrlKey) {
